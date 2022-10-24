@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/15 13:44:44 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/24 20:39:28 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <deque>
 // #if 1 //CREATE A REAL STL EXAMPLE
 // 	#include <map>
-// 	#include <vector>
 // 	namespace ft = std;
 // #else
+	#include <vector>
 	#include <stack>
 	#include <map.hpp>
 	#include <stack.hpp>
@@ -76,14 +76,21 @@ int main()
 	stack_intt.push(1);
 	stack_intt.push(89);
 
-	size = stack_intt.size();
-
+	size = stack_int.size();
+	std::cout << "La size de ft::stack = " << stack_int.size() << " et voici ce qu'elle contient : " << std::endl;
 	for (size_t i = size; i != 0; i--)
 	{
-		std::cout << stack_int.top() << " size : " << stack_int.size() << std::endl;
+		std::cout << stack_int.top() << std::endl;
 		stack_int.pop();
 	}
-	
+
+	size = stack_intt.size();
+	std::cout << std::endl << "La size de std::stack = " << stack_intt.size() << " et voici ce qu'elle contient : " << std::endl;
+	for (size_t i = size; i != 0; i--)
+	{
+		std::cout << stack_intt.top() << std::endl;
+		stack_intt.pop();
+	}
 }
 
 // int main(int argc, char** argv) {
