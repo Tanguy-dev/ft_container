@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/24 23:59:49 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/25 20:16:04 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ namespace ft
 				_alloc.construct(&_start[i], x._start[i]);
 		}
 
-		~vector(void)
+		~vector()
 		{
 			_alloc.deallocate(_start, _capacity);
 		}
@@ -137,6 +137,35 @@ namespace ft
 		// const_iterator cend() const noexcept;
 		// const_reverse_iterator crbegin() const noexcept;
 		// const_reverse_iterator crend() const noexcept;
+
+		/*		Capacity		*/
+		size_type size() const
+		{
+			return (_size);
+		}
+		
+		size_type max_size() const
+		{
+			return (_size);
+		}
+		
+		void resize (size_type n, value_type val = value_type())
+		{
+
+		}
+		
+		size_type capacity() const
+		{
+			return (_capacity);
+		}
+		
+		bool empty() const
+		{
+			if (_size)
+				return (false);
+			return (true);
+		}
+		
 	};
 }
 

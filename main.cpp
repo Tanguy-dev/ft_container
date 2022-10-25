@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/24 20:39:28 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/25 20:41:20 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,25 @@ int main()
 		std::cout << stack_intt.top() << std::endl;
 		stack_intt.pop();
 	}
+
+	std::cout << std::endl << "<---------------------------------Vector test--------------------------------->" << std::endl;
+
+	std::vector<int> real_vec;
+	ft::vector<int> my_vec;
+
+	real_vec.push_back(10);
+	real_vec.push_back(42);
+	real_vec.push_back(32);
+	real_vec.push_back(895);
+
+	for (std::vector<int>::iterator it = real_vec.begin() ; it != real_vec.end(); ++it)
+    	std::cout << ' ' << *it;
+	// for (std::vector<int>::iterator it = my_vec.begin() ; it != my_vec.end(); ++it)
+    // 	std::cout << ' ' << *it;
+	// for (size_t i = 0; real_vec[i]; i++)
+	// {
+	// 	std::cout << real_vec[i] << std::endl;
+	// }
 }
 
 // int main(int argc, char** argv) {
