@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/25 20:41:20 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/26 23:32:59 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 // 	#include <map>
 // 	namespace ft = std;
 // #else
-	#include <vector>
-	#include <stack>
-	#include <map.hpp>
-	#include <stack.hpp>
-	#include <vector.hpp>
+#include <vector>
+#include <stack>
+#include <map.hpp>
+#include <stack.hpp>
+#include <vector.hpp>
 // #endif
 
 #include <stdlib.h>
@@ -34,16 +34,15 @@ struct Buffer
 	char buff[BUFFER_SIZE];
 };
 
-
 #define COUNT (MAX_RAM / (int)sizeof(Buffer))
 
-template<typename T>
+template <typename T>
 class MutantStack : public ft::stack<T>
 {
 public:
 	MutantStack() {}
-	MutantStack(const MutantStack<T>& src) { *this = src; }
-	MutantStack<T>& operator=(const MutantStack<T>& rhs) 
+	MutantStack(const MutantStack<T> &src) { *this = src; }
+	MutantStack<T> &operator=(const MutantStack<T> &rhs)
 	{
 		this->c = rhs.c;
 		return *this;
@@ -85,14 +84,16 @@ int main()
 	}
 
 	size = stack_intt.size();
-	std::cout << std::endl << "La size de std::stack = " << stack_intt.size() << " et voici ce qu'elle contient : " << std::endl;
+	std::cout << std::endl
+			  << "La size de std::stack = " << stack_intt.size() << " et voici ce qu'elle contient : " << std::endl;
 	for (size_t i = size; i != 0; i--)
 	{
 		std::cout << stack_intt.top() << std::endl;
 		stack_intt.pop();
 	}
 
-	std::cout << std::endl << "<---------------------------------Vector test--------------------------------->" << std::endl;
+	std::cout << std::endl
+			  << "<---------------------------------Vector test--------------------------------->" << std::endl;
 
 	std::vector<int> real_vec;
 	ft::vector<int> my_vec;
@@ -102,14 +103,80 @@ int main()
 	real_vec.push_back(32);
 	real_vec.push_back(895);
 
-	for (std::vector<int>::iterator it = real_vec.begin() ; it != real_vec.end(); ++it)
-    	std::cout << ' ' << *it;
+	for (std::vector<int>::iterator it = real_vec.begin(); it != real_vec.end(); ++it)
+		std::cout << ' ' << *it;
 	// for (std::vector<int>::iterator it = my_vec.begin() ; it != my_vec.end(); ++it)
-    // 	std::cout << ' ' << *it;
+	// 	std::cout << ' ' << *it;
 	// for (size_t i = 0; real_vec[i]; i++)
 	// {
 	// 	std::cout << real_vec[i] << std::endl;
 	// }
+	std::cout << '\n'
+			  << std::endl;
+
+	ft::vector<int> myvector;
+
+	//   set some initial content:
+	for (int i = 1; i < 10; i++)
+		myvector.push_back(i);
+
+	myvector.resize(5);
+	std::cout << "myvector contains after 5 :";
+	for (size_t i = 0; i < myvector.size(); i++)
+		std::cout << ' ' << myvector[i];
+	std::cout << '\n';
+	myvector.resize(8, 100);
+	std::cout << "myvector contains after 8,100 :";
+	for (size_t i = 0; i < myvector.size(); i++)
+		std::cout << ' ' << myvector[i];
+	std::cout << '\n';
+	myvector.resize(12);
+	std::cout << "myvector contains after 12 :";
+	for (size_t i = 0; i < myvector.size(); i++)
+		std::cout << ' ' << myvector[i];
+	myvector.resize(10);
+
+	std::cout << '\n'
+			  << std::endl;
+
+	// assign some values:
+	for (unsigned i = 0; i < myvector.size(); i++)
+		myvector.at(i) = i;
+
+	std::cout << "myvector contains:";
+	for (unsigned i = 0; i < myvector.size(); i++)
+		std::cout << ' ' << myvector.at(i);
+
+	std::cout << '\n'
+			  << std::endl;
+
+	std::vector<int> myfront;
+
+	myfront.push_back(78);
+	myfront.push_back(16);
+
+	// now front equals 78, and back 16
+
+	myfront.front() -= myfront.back();
+
+	std::cout << "myfront.front() is now " << myfront.front() << '\n';
+
+
+	std::cout << '\n';
+
+	std::vector<int> myback;
+
+	myback.push_back(10);
+
+	while (myback.back() != 0)
+	{
+		myback.push_back(myback.back() - 1);
+	}
+
+	std::cout << "myback contains:";
+	for (unsigned i = 0; i < myback.size(); i++)
+		std::cout << ' ' << myback[i];
+	std::cout << '\n';
 }
 
 // int main(int argc, char** argv) {
@@ -155,7 +222,7 @@ int main()
 // 	{
 // 		//NORMAL ! :P
 // 	}
-	
+
 // 	for (int i = 0; i < COUNT; ++i)
 // 	{
 // 		map_int.insert(ft::make_pair(rand(), rand()));

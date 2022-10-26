@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/25 20:16:04 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/26 23:38:46 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,29 +143,145 @@ namespace ft
 		{
 			return (_size);
 		}
-		
+
 		size_type max_size() const
 		{
-			return (_size);
+			return (_alloc.max_size());
 		}
-		
+
 		void resize (size_type n, value_type val = value_type())
 		{
+			size_type	new_size;
 
+			if (n < _size)
+			{
+				while (_size != n)
+					this->pop_back();
+			}
+			else if (n > _size)
+			{
+				if (n > _capacity)
+				{
+					if (_capacity == 0)
+						new_size = 1;
+					else
+						new_size = _capacity * 2;
+					if (new_size < n)
+						new_size = n;
+					this->reserve(n);
+				}
+				while (_size < n)
+				{
+					_alloc.construct(&_start[_size], val);
+					_size++;
+				}
+			}
 		}
-		
+
 		size_type capacity() const
 		{
 			return (_capacity);
 		}
-		
+
 		bool empty() const
 		{
 			if (_size)
 				return (false);
 			return (true);
 		}
+
+		void reserve (size_type n)
+		{
+			if (n > this->max_size())
+				throw std::length_error("vector::reserve");
+			if (n != 0 && n > _capacity)
+			{
+				value_type *tmp = _alloc.allocate(n);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&tmp[i], _start[i]);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&_start[i]);
+				_alloc.deallocate(_start,  _capacity);
+				_capacity = 0;
+				_start = tmp;
+			}
+		}
+
+		/*		Element access		*/
+		reference operator[] (size_type n)
+		{
+			return (_start[n]);
+		}
 		
+		const_reference operator[] (size_type n) const
+		{
+			return (_start[n]);
+		}
+
+		reference at (size_type n)
+		{
+			if (n >= _size)
+				throw std::out_of_range("vector");
+			return (_start[n]);
+		}
+		
+		const_reference at (size_type n) const
+		{
+			if (n >= _size)
+				throw std::out_of_range("vector");
+			return (_start[n]);
+		}
+		
+		reference front()
+		{
+			return (_start[0]);
+		}
+		
+		const_reference front() const
+		{
+			return (_start[0]);
+		}
+		
+		reference back()
+		{
+			return (_start[this->max_size()]);
+		}
+		
+		const_reference back() const
+		{
+			return (_start[this->max_size()]);
+		}
+		
+		// value_type* data() noexcept
+		// {
+		// }
+		
+		// const value_type* data() const noexcept
+		// {
+		// }
+		
+
+
+		/*		Modifiers		*/
+		void push_back (const value_type& val)
+		{
+			if (_capacity < _size + 1)
+			{
+				if (_size == 0)
+					this->reserve(1);
+				else
+					this->reserve(_size * 2);
+			}
+			_alloc.construct(&_start[_size], val);
+			_size++;
+		}
+
+		void pop_back()
+		{
+			_alloc.destroy(&_start[_size - 1]);
+			_size--;
+		}
+
 	};
 }
 
