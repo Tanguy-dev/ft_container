@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/26 23:32:59 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/27 19:25:19 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int main()
 	std::cout << '\n'
 			  << std::endl;
 
-	std::vector<int> myfront;
+	ft::vector<int> myfront;
 
 	myfront.push_back(78);
 	myfront.push_back(16);
@@ -164,7 +164,7 @@ int main()
 
 	std::cout << '\n';
 
-	std::vector<int> myback;
+	ft::vector<int> myback;
 
 	myback.push_back(10);
 
@@ -176,7 +176,65 @@ int main()
 	std::cout << "myback contains:";
 	for (unsigned i = 0; i < myback.size(); i++)
 		std::cout << ' ' << myback[i];
-	std::cout << '\n';
+	std::cout << '\n' << std::endl;
+
+	ft::vector<int> myassign;
+	ft::vector<int> myassignsec;
+
+	myassign.assign(7,100);             // 7 ints with a value of 100
+  
+
+  std::cout << "Size of myassign: " << int (myassign.size()) << '\n';
+    for (unsigned i = 0; i < myassign.size(); i++)
+    std::cout << myassign[i] << '\n';
+  myassign.assign(2,186);             // 7 ints with a value of 100
+  std::cout << "Size of myassign: " << int (myassign.size()) << '\n';
+  
+  for (unsigned i = 0; i < myassign.size(); i++)
+    std::cout << myassign[i] << '\n';
+
+// 	std::vector<int>::iterator it;
+//   it=myassign.begin()+1;
+
+//   myassignsec.assign (it - 12,myassign.end()-1); // the 5 central values of first
+//   std::cout << "Size of myassignsec: " << int (myassignsec.size()) << '\n';
+//     for (unsigned i = 0; i < myassignsec.size(); i++)
+//     std::cout << myassignsec[i] << '\n';
+
+std::cout << '\n';
+std::vector<int> myclear;
+  myclear.push_back (100);
+  myclear.push_back (200);
+  myclear.push_back (300);
+
+  std::cout << "myclear contains:";
+  for (unsigned i=0; i<myclear.size(); i++)
+    std::cout << ' ' << myclear[i];
+  std::cout << '\n';
+
+  myclear.clear();
+  myclear.push_back (1101);
+  myclear.push_back (2202);
+
+  std::cout << "myclear contains:";
+  for (unsigned i=0; i<myclear.size(); i++)
+    std::cout << ' ' << myclear[i];
+  std::cout << '\n' << std::endl;
+
+  std::vector<int> foo (3,100);   // three ints with a value of 100
+  std::vector<int> bar (5,200);   // five ints with a value of 200
+
+  foo.swap(bar);
+
+  std::cout << "foo contains:";
+  for (unsigned i=0; i<foo.size(); i++)
+    std::cout << ' ' << foo[i];
+  std::cout << '\n';
+
+  std::cout << "bar contains:";
+  for (unsigned i=0; i<bar.size(); i++)
+    std::cout << ' ' << bar[i];
+  std::cout << '\n';
 }
 
 // int main(int argc, char** argv) {
