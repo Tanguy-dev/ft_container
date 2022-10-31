@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/28 18:22:16 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/31 20:12:35 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ int main()
 
 	std::cout << "myfront.front() is now " << myfront.front() << '\n';
 
-
 	std::cout << '\n';
 
 	ft::vector<int> myback;
@@ -176,89 +175,151 @@ int main()
 	std::cout << "myback contains:";
 	for (unsigned i = 0; i < myback.size(); i++)
 		std::cout << ' ' << myback[i];
-	std::cout << '\n' << std::endl;
+	std::cout << '\n'
+			  << std::endl;
 
 	ft::vector<int> myassign;
 	ft::vector<int> myassignsec;
 
-	myassign.assign(7,100);             // 7 ints with a value of 100
-  
+	myassign.assign(7, 100); // 7 ints with a value of 100
 
-  std::cout << "Size of myassign: " << int (myassign.size()) << '\n';
-    for (unsigned i = 0; i < myassign.size(); i++)
-    std::cout << myassign[i] << '\n';
-  myassign.assign(2,186);             // 7 ints with a value of 100
-  std::cout << "Size of myassign: " << int (myassign.size()) << '\n';
-  
-  for (unsigned i = 0; i < myassign.size(); i++)
-    std::cout << myassign[i] << '\n';
+	std::cout << "Size of myassign: " << int(myassign.size()) << '\n';
+	for (unsigned i = 0; i < myassign.size(); i++)
+		std::cout << myassign[i] << ' ';
+	myassign.assign(2, 186); // 7 ints with a value of 100
+	std::cout << "\nSize of myassign: " << int(myassign.size()) << '\n';
 
-// 	std::vector<int>::iterator it;
-//   it=myassign.begin()+1;
+	for (unsigned i = 0; i < myassign.size(); i++)
+		std::cout << myassign[i] << ' ';
 
-//   myassignsec.assign (it - 12,myassign.end()-1); // the 5 central values of first
-//   std::cout << "Size of myassignsec: " << int (myassignsec.size()) << '\n';
-//     for (unsigned i = 0; i < myassignsec.size(); i++)
-//     std::cout << myassignsec[i] << '\n';
+	// ft::vector<int>::iterator ittttt;
+	// ittttt = myassign.begin() + 1;
 
-std::cout << '\n';
-std::vector<int> myclear;
-  myclear.push_back (100);
-  myclear.push_back (200);
-  myclear.push_back (300);
+	// myassignsec.assign(ittttt, myassign.end() - 1); // the 5 central values of first
+	// std::cout << "Size of myassignsec: " << int(myassignsec.size()) << '\n';
+	// for (unsigned i = 0; i < myassignsec.size(); i++)
+	// 	std::cout << myassignsec[i] << '\n';
 
-  std::cout << "myclear contains:";
-  for (unsigned i=0; i<myclear.size(); i++)
-    std::cout << ' ' << myclear[i];
-  std::cout << '\n';
+	std::cout << '\n'
+			  << std::endl;
+	ft::vector<int> myclear;
+	myclear.push_back(100);
+	myclear.push_back(200);
+	myclear.push_back(300);
 
-  myclear.clear();
-  myclear.push_back (1101);
-  myclear.push_back (2202);
+	std::cout << "myclear contains:";
+	for (unsigned i = 0; i < myclear.size(); i++)
+		std::cout << ' ' << myclear[i];
+	std::cout << '\n';
 
-  std::cout << "myclear contains:";
-  for (unsigned i=0; i<myclear.size(); i++)
-    std::cout << ' ' << myclear[i];
-  std::cout << '\n' << std::endl;
+	myclear.clear();
+	myclear.push_back(1101);
+	myclear.push_back(2202);
 
-  std::vector<int> foo (3,100);   // three ints with a value of 100
-  std::vector<int> bar (5,200);   // five ints with a value of 200
+	std::cout << "myclear contains:";
+	for (unsigned i = 0; i < myclear.size(); i++)
+		std::cout << ' ' << myclear[i];
+	std::cout << '\n'
+			  << std::endl;
 
-  foo.swap(bar);
+	ft::vector<int> foo(3, 100); // three ints with a value of 100
+	ft::vector<int> bar(5, 200); // five ints with a value of 200
 
-  std::cout << "foo contains:";
-  for (unsigned i=0; i<foo.size(); i++)
-    std::cout << ' ' << foo[i];
-  std::cout << '\n';
+	foo.swap(bar);
 
-  std::cout << "bar contains:";
-  for (unsigned i=0; i<bar.size(); i++)
-    std::cout << ' ' << bar[i];
-  std::cout << '\n' << std::endl;
+	std::cout << "foo contains:";
+	for (unsigned i = 0; i < foo.size(); i++)
+		std::cout << ' ' << foo[i];
+	std::cout << '\n';
 
-    std::vector<int> myend;
-  for (int i=1; i<=20; i++) myend.push_back(i);
+	std::cout << "bar contains:";
+	for (unsigned i = 0; i < bar.size(); i++)
+		std::cout << ' ' << bar[i];
+	std::cout << '\n'
+			  << std::endl;
 
-  std::cout << "myend contains:";
-  for (std::vector<int>::iterator it = myend.begin() ; it != myend.end(); ++it)
-    std::cout << ' ' << *it;
-  std::cout << '\n' << std::endl;
+	ft::vector<int> myend;
+	for (int i = 1; i <= 20; i++)
+		myend.push_back(i);
 
-  std::vector<int> myerase;
+	std::cout << "myend contains:";
+	for (ft::vector<int>::iterator it = myend.begin(); it != myend.end(); ++it)
+		std::cout << ' ' << *it;
+	std::cout << '\n'
+			  << std::endl;
 
-  // set some values (from 1 to 10)
-  for (int i=1; i<=10; i++) myerase.push_back(i);
+	ft::vector<int> myerase;
 
-  // erase the 6th element
-  myerase.erase (myerase.begin()+5);
+	// set some values (from 1 to 10)
+	for (int i = 1; i <= 10; i++)
+		myerase.push_back(i);
 
-  // erase the first 3 elements:
-  myerase.erase (myerase.begin(),myerase.begin()+3);
+	// erase the 6th element
+	myerase.erase(myerase.begin() + 5);
 
-  std::cout << "myerase contains:";
-  for (unsigned i=0; i<myerase.size(); ++i)
-    std::cout << ' ' << myerase[i];
-  std::cout << '\n';
+	// erase the first 3 elements:
+	myerase.erase(myerase.begin(), myerase.begin() + 3);
+
+	std::cout << "myerase contains:";
+	for (unsigned i = 0; i < myerase.size(); ++i)
+		std::cout << ' ' << myerase[i];
+	std::cout << '\n'
+			  << std::endl;
+
+	// ft::vector<int> myinsert(3, 100);
+	// ft::vector<int>::iterator it;
+
+	// it = myinsert.begin();
+	// it = myinsert.insert(it, 200);
+
+	// myinsert.insert(it, 2, 300);
+
+	// // "it" no longer valid, get a new one:
+	// it = myinsert.begin();
+
+	//   ft::vector<int> anothervector (2,400);
+	//   myinsert.insert (it+2,anothervector.begin(),anothervector.end());
+
+	// int myarray[] = {501, 502, 503};
+	// myinsert.insert(myinsert.begin(), myarray, myarray + 3);
+
+	// std::cout << "myinsert contains:";
+	// for (it = myinsert.begin(); it < myinsert.end(); it++)
+	// 	std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	ft::vector<int> fooo(3, 100); // three ints with a value of 100
+	ft::vector<int> barr(2, 200); // two ints with a value of 200
+
+	if (fooo == barr)
+		std::cout << "fooo and barr are equal\n";
+	if (fooo != barr)
+		std::cout << "fooo and barr are not equal\n";
+	if (fooo < barr)
+		std::cout << "fooo is less than barr\n";
+	if (fooo > barr)
+		std::cout << "fooo is greater than barr\n";
+	if (fooo <= barr)
+		std::cout << "fooo is less than or equal to barr\n";
+	if (fooo >= barr)
+		std::cout << "fooo is greater than or equal to barr\n";
+
+	std::cout << '\n';
+
+	ft::vector<int> lil(3, 100); // three ints with a value of 100
+	ft::vector<int> lal(5, 200); // five ints with a value of 200
+
+	lil.swap(lal);
+
+	std::cout << "lil contains:";
+	for (ft::vector<int>::iterator it = lil.begin(); it != lil.end(); ++it)
+		std::cout << ' ' << *it;
+	std::cout << '\n';
+
+	std::cout << "lal contains:";
+	for (ft::vector<int>::iterator it = lal.begin(); it != lal.end(); ++it)
+		std::cout << ' ' << *it;
+	std::cout << '\n';
 }
 
 // int main(int argc, char** argv) {

@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:29:38 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/25 21:30:13 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/31 20:09:45 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ namespace ft
 		{
 		}
 
-		pointer get_ptr(void)
+		pointer get_ptr(void) const
 		{
 			return (_ptr);
 		}
@@ -61,7 +61,7 @@ namespace ft
 		vector_iterator &operator=(const vector_iterator<const T> &cpy)
 		{
 			if (*this != cpy)
-				_ptr = cpy.get_prt();
+				_ptr = cpy.get_ptr();
 			return (*this);
 		}
 
