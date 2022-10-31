@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/27 19:25:19 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/28 18:22:16 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,30 @@ std::vector<int> myclear;
   std::cout << "bar contains:";
   for (unsigned i=0; i<bar.size(); i++)
     std::cout << ' ' << bar[i];
+  std::cout << '\n' << std::endl;
+
+    std::vector<int> myend;
+  for (int i=1; i<=20; i++) myend.push_back(i);
+
+  std::cout << "myend contains:";
+  for (std::vector<int>::iterator it = myend.begin() ; it != myend.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n' << std::endl;
+
+  std::vector<int> myerase;
+
+  // set some values (from 1 to 10)
+  for (int i=1; i<=10; i++) myerase.push_back(i);
+
+  // erase the 6th element
+  myerase.erase (myerase.begin()+5);
+
+  // erase the first 3 elements:
+  myerase.erase (myerase.begin(),myerase.begin()+3);
+
+  std::cout << "myerase contains:";
+  for (unsigned i=0; i<myerase.size(); ++i)
+    std::cout << ' ' << myerase[i];
   std::cout << '\n';
 }
 

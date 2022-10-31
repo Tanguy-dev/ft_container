@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/27 21:31:00 by thamon           ###   ########.fr       */
+/*   Updated: 2022/10/28 18:16:33 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,7 @@ namespace ft
 
 		iterator erase(iterator position)
 		{
-			return (erase(position, position));
+			return (this->erase(position, position + 1));
 		}
 
 		iterator erase(iterator first, iterator last)
@@ -321,10 +321,20 @@ namespace ft
 			tmp = first;
 			while (tmp != last)
 			{
-				_alloc.destroy(&tmp[_size]);
+				_alloc.destroy(&(*tmp));
+				tmp++;
 				_size--;
 			}
-			
+			tmp = first;
+			i = 0;
+			while (tmp != this->end())
+			{
+				_alloc.construct(&(*tmp), *(last + i));
+				_alloc.destroy(&(*(last + i)));
+				tmp++;
+				i++;
+			}
+			return (first);
 		}
 
 		void swap(vector &x)
