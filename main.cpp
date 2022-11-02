@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/31 20:12:35 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/02 20:08:41 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,16 +192,17 @@ int main()
 	for (unsigned i = 0; i < myassign.size(); i++)
 		std::cout << myassign[i] << ' ';
 
-	// ft::vector<int>::iterator ittttt;
-	// ittttt = myassign.begin() + 1;
+	ft::vector<int>::iterator ittttt;
+	ittttt = myassign.begin() + 1;
 
-	// myassignsec.assign(ittttt, myassign.end() - 1); // the 5 central values of first
-	// std::cout << "Size of myassignsec: " << int(myassignsec.size()) << '\n';
-	// for (unsigned i = 0; i < myassignsec.size(); i++)
-	// 	std::cout << myassignsec[i] << '\n';
+	std::cout << '\n';
 
-	std::cout << '\n'
-			  << std::endl;
+	myassignsec.assign(ittttt, myassign.end()); // the 5 central values of first
+	std::cout << "Size of myassignsec: " << int(myassignsec.size()) << '\n';
+	for (unsigned i = 0; i < myassignsec.size(); i++)
+		std::cout << myassignsec[i] << '\n';
+
+	std::cout << '\n';
 	ft::vector<int> myclear;
 	myclear.push_back(100);
 	myclear.push_back(200);
@@ -266,27 +267,28 @@ int main()
 	std::cout << '\n'
 			  << std::endl;
 
-	// ft::vector<int> myinsert(3, 100);
-	// ft::vector<int>::iterator it;
+	ft::vector<int> myinsert(3, 100);
+	ft::vector<int>::iterator it;
 
-	// it = myinsert.begin();
-	// it = myinsert.insert(it, 200);
+	it = myinsert.begin();
+	it = myinsert.insert(it, 200);
 
-	// myinsert.insert(it, 2, 300);
+	myinsert.insert(it, 2, 300);
 
-	// // "it" no longer valid, get a new one:
-	// it = myinsert.begin();
+	// "it" no longer valid, get a new one:
+	it = myinsert.begin();
 
-	//   ft::vector<int> anothervector (2,400);
-	//   myinsert.insert (it+2,anothervector.begin(),anothervector.end());
+	ft::vector<int> anothervector(2, 400);
+	myinsert.insert(it + 2, anothervector.begin(), anothervector.end());
 
-	// int myarray[] = {501, 502, 503};
-	// myinsert.insert(myinsert.begin(), myarray, myarray + 3);
+	int myarray[] = {501, 502, 503};
+	myinsert.insert(myinsert.begin(), myarray, myarray + 3);
 
-	// std::cout << "myinsert contains:";
-	// for (it = myinsert.begin(); it < myinsert.end(); it++)
-	// 	std::cout << ' ' << *it;
-	// std::cout << '\n';
+	std::cout << "myinsert contains:";
+	for (it = myinsert.begin(); it < myinsert.end(); it++)
+		std::cout << ' ' << *it;
+	std::cout << '\n'
+			  << std::endl;
 
 	ft::vector<int> fooo(3, 100); // three ints with a value of 100
 	ft::vector<int> barr(2, 200); // two ints with a value of 200

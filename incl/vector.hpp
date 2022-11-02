@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/31 20:11:02 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/02 20:06:33 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,27 +263,27 @@ namespace ft
 		// }
 
 		/*		Modifiers		*/
-		// template <class InputIterator>
-		// typename std::enable_if<!ft::is_integral<T>::value, void>::type
-		// assign(InputIterator first, InputIterator last)
-		// {
-		// 	int range;
-		// 	InputIterator tmp;
+		template <class InputIterator>
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+		assign(InputIterator first, InputIterator last)
+		{
+			int range;
+			InputIterator tmp;
 
-		// 	tmp = first;
-		// 	range = 0;
-		// 	while (tmp != last)
-		// 	{
-		// 		tmp++;
-		// 		range++;
-		// 	}
-		// 	if (range < 0)
-		// 		std::length_error("vector");
-		// 	this->clear();
-		// 	this->reserve(range);
-		// 	for (; first != last; ++first)
-		// 		this->push_back(*first);
-		// }
+			tmp = first;
+			range = 0;
+			while (tmp != last)
+			{
+				tmp++;
+				range++;
+			}
+			if (range < 0)
+				std::length_error("vector");
+			this->clear();
+			this->reserve(range);
+			for (; first != last; ++first)
+				this->push_back(*first);
+		}
 
 		void assign(size_type n, const value_type &val)
 		{
@@ -359,11 +359,46 @@ namespace ft
 			_size += n;
 		}
 
-		// template <class InputIterator>
-		// typename std::enable_if<!ft::is_integral<T>::value, void>::type
-		// insert(iterator position, InputIterator first, InputIterator last)
-		// {
-		// }
+		template <class InputIterator>
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+		insert(iterator position, InputIterator first, InputIterator last)
+		{
+			iterator tmp;
+			iterator src;
+			iterator dest;
+			InputIterator tmp_input;
+			size_type index;
+			size_type nb;
+
+			tmp_input = first;
+			nb = 0;
+			while (tmp_input != last)
+			{
+				tmp_input++;
+				nb++;
+			}
+			tmp = iterator(&(*first));
+			index = &(*position) - _start;
+			if (_size + nb > _capacity)
+				this->reserve(_size + nb);
+			src = this->end() - 1;
+			dest = src + nb;
+			while (src >= iterator(_start + index))
+			{
+				_alloc.construct(&(*dest), *src);
+				_alloc.destroy(&(*src));
+				src--;
+				dest--;
+			}
+			src++;
+			while (first != last)
+			{
+				_alloc.construct(&(*src), *first);
+				src++;
+				first++;
+			}
+			_size += nb;
+		}
 
 		iterator erase(iterator position)
 		{
@@ -426,77 +461,76 @@ namespace ft
 			return (_alloc);
 		}
 	};
-			/*		Operateur		*/
-		template <class T, class Alloc>
-		bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
-		{
-			typename ft::vector<T>::const_iterator lit;
-			typename ft::vector<T>::const_iterator rit;
+	/*		Operateur		*/
+	template <class T, class Alloc>
+	bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+		typename ft::vector<T>::const_iterator lit;
+		typename ft::vector<T>::const_iterator rit;
 
-			lit = lhs.begin();
-			rit = rhs.begin();
-			if (lhs.size() != rhs.size())
+		lit = lhs.begin();
+		rit = rhs.begin();
+		if (lhs.size() != rhs.size())
+			return (false);
+		while (lit != lhs.end())
+		{
+			if (*lit != *rit)
 				return (false);
-			while (lit != lhs.end())
-			{
-				if (*lit != *rit)
-					return (false);
-				lit++;
-				rit++;
-			}
-			return (true);
+			lit++;
+			rit++;
 		}
+		return (true);
+	}
 
-		template <class T, class Alloc>
-		bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
-		{
-			return !(lhs == rhs);
-		}
+	template <class T, class Alloc>
+	bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+		return !(lhs == rhs);
+	}
 
-		template <class T, class Alloc>
-		bool operator<(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
-		{
-			typename ft::vector<T>::const_iterator lit;
-			typename ft::vector<T>::const_iterator rit;
+	template <class T, class Alloc>
+	bool operator<(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+		typename ft::vector<T>::const_iterator lit;
+		typename ft::vector<T>::const_iterator rit;
 
-			lit = lhs.begin();
-			rit = rhs.begin();
-			while (lit != lhs.end())
-			{
-				if (rit == rhs.end() || *lit > *rit)
-					return (false);
-				else if (*lit < *rit)
-					return (true);
-				lit++;
-				rit++;
-			}
-			return (rit != rhs.end());
-		}
-		
-		template <class T, class Alloc>
-		bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		lit = lhs.begin();
+		rit = rhs.begin();
+		while (lit != lhs.end())
 		{
-			return !(rhs < lhs);
+			if (rit == rhs.end() || *lit > *rit)
+				return (false);
+			else if (*lit < *rit)
+				return (true);
+			lit++;
+			rit++;
 		}
+		return (rit != rhs.end());
+	}
 
-		template <class T, class Alloc>
-		bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
-		{
-			return (rhs < lhs);
-		}
+	template <class T, class Alloc>
+	bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+		return !(rhs < lhs);
+	}
 
-		template <class T, class Alloc>
-		bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
-		{
-			return !(lhs < rhs);
-		}
+	template <class T, class Alloc>
+	bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+		return (rhs < lhs);
+	}
 
-		template <class T, class Alloc>
-		void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
-		{
-			return (x.swap(y));
-		}
+	template <class T, class Alloc>
+	bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class T, class Alloc>
+	void swap(vector<T, Alloc> &x, vector<T, Alloc> &y)
+	{
+		return (x.swap(y));
+	}
 }
-
 
 #endif
