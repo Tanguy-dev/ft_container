@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:29:38 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/31 20:09:45 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/02 23:18:04 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace ft
 		typedef Reference reference;
 		typedef Category iterator_category;
 
-	protected:
+	private:
 		pointer _ptr;
 
 	public:
@@ -131,14 +131,14 @@ namespace ft
 			return (_ptr);
 		}
 
-		vector_iterator operator+(int nb)
+		vector_iterator operator+(int nb) const
 		{
 			vector_iterator tmp(*this);
 			tmp += nb;
 			return (tmp);
 		}
 
-		vector_iterator operator-(int nb)
+		vector_iterator operator-(int nb) const
 		{
 			vector_iterator tmp(*this);
 			tmp -= nb;

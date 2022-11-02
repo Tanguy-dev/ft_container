@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/02 20:06:33 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/02 23:20:12 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ namespace ft
 
 		explicit vector(size_type n, const value_type &value = value_type(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _start(0), _size(n), _capacity(n)
 		{
-			_start = alloc.allocate(n);
+			_start = _alloc.allocate(n);
 			for (size_t i = 0; i < n; i++)
 				_alloc.construct(&_start[i], value);
 		}
 
 		template <class InputIterator>
-		vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type()) : _alloc(alloc), _start(0), _size(0), _capacity(0)
+		vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type* = 0) : _alloc(alloc), _start(0), _size(0), _capacity(0)
 		{
 			this->assign(first, last);
 		}
 
-		vector(const vector &x) : _alloc(x._alloc), _start(0), _size(x._size), _capacity(x._size)
+		vector(const vector &x) : _alloc(x._alloc), _start(x._start), _size(x._size), _capacity(x._size)
 		{
-			_start = _alloc.allocate(x._size);
+			_start = _alloc.allocate(_size);
 			for (size_t i = 0; i < _size; i++)
 				_alloc.construct(&_start[i], x._start[i]);
 		}
@@ -135,11 +135,6 @@ namespace ft
 			return (const_reverse_iterator(this->begin()));
 		}
 
-		// const_iterator cbegin() const noexcept;
-		// const_iterator cend() const noexcept;
-		// const_reverse_iterator crbegin() const noexcept;
-		// const_reverse_iterator crend() const noexcept;
-
 		/*		Capacity		*/
 		size_type size() const
 		{
@@ -170,7 +165,7 @@ namespace ft
 						new_size = _capacity * 2;
 					if (new_size < n)
 						new_size = n;
-					this->reserve(n);
+					this->reserve(new_size);
 				}
 				while (_size < n)
 				{
@@ -204,7 +199,7 @@ namespace ft
 				for (size_type i = 0; i < _size; i++)
 					_alloc.destroy(&_start[i]);
 				_alloc.deallocate(_start, _capacity);
-				_capacity = 0;
+				_capacity = n;
 				_start = tmp;
 			}
 		}
@@ -253,14 +248,6 @@ namespace ft
 		{
 			return (_start[_size - 1]);
 		}
-
-		// value_type* data() noexcept
-		// {
-		// }
-
-		// const value_type* data() const noexcept
-		// {
-		// }
 
 		/*		Modifiers		*/
 		template <class InputIterator>
