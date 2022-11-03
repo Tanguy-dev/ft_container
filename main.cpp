@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/02 23:04:30 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/03 19:49:46 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,11 +324,42 @@ public:
 // 	std::cout << '\n';
 // }
 
+template <typename T>
+class foo {
+	public:
+		typedef T	value_type;
 
-#define T_SIZE_TYPE typename ft::vector<T>::size_type
+		foo(void) : value(), _verbose(false) { };
+		foo(value_type src, const bool verbose = false) : value(src), _verbose(verbose) { };
+		foo(foo const &src, const bool verbose = false) : value(src.value), _verbose(verbose) { };
+		~foo(void) { if (this->_verbose) std::cout << "~foo::foo()" << std::endl; };
+		void m(void) { std::cout << "foo::m called [" << this->value << "]" << std::endl; };
+		void m(void) const { std::cout << "foo::m const called [" << this->value << "]" << std::endl; };
+		foo &operator=(value_type src) { this->value = src; return *this; };
+		foo &operator=(foo const &src) {
+			if (this->_verbose || src._verbose)
+				std::cout << "foo::operator=(foo) CALLED" << std::endl;
+			this->value = src.value;
+			return *this;
+		};
+		value_type	getValue(void) const { return this->value; };
+		void		switchVerbose(void) { this->_verbose = !(this->_verbose); };
+
+		operator value_type(void) const {
+			return value_type(this->value);
+		}
+	private:
+		value_type	value;
+		bool		_verbose;
+};
+
+
+#define TESTED_TYPE int
+#define TESTED_NAMESPACE ft
+#define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
 
 template <typename T>
-void	printSize(ft::vector<T> &vct, bool print_content = true)
+void	printSize(TESTED_NAMESPACE::vector<T> &vct, bool print_content = true)
 {
 	 T_SIZE_TYPE size = vct.size();
 	 T_SIZE_TYPE capacity = vct.capacity();
@@ -340,8 +371,8 @@ void	printSize(ft::vector<T> &vct, bool print_content = true)
 	std::cout << "max_size: " << vct.max_size() << std::endl;
 	if (print_content)
 	{
-		typename ft::vector<T>::iterator it = vct.begin();
-		typename ft::vector<T>::iterator ite = vct.end();
+		typename TESTED_NAMESPACE::vector<T>::iterator it = vct.begin();
+		typename TESTED_NAMESPACE::vector<T>::iterator ite = vct.end();
 		std::cout << std::endl << "Content is:" << std::endl;
 		for (; it != ite; ++it)
 			std::cout << "- " << *it << std::endl;
@@ -349,33 +380,135 @@ void	printSize(ft::vector<T> &vct, bool print_content = true)
 	std::cout << "###############################################" << std::endl;
 }
 
-int main()
+void	prepost_incdec(TESTED_NAMESPACE::vector<TESTED_TYPE> &vct)
 {
-	ft::vector<std::string> vct(8);
-	ft::vector<std::string> vct2;
-	ft::vector<std::string>::iterator it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_tmp;
 
-	for (size_t i = 0; i < vct.size(); ++i)
-	{
-		it[i] = std::string((vct.size() - i), i + 65);
-		std::cout <<  std::string((vct.size() - i), i + 65) << std::endl;
-	}
-	printSize(vct, true);
+	std::cout << "Pre inc" << std::endl;
+	it_tmp = ++it;
+	std::cout << *it_tmp << " | " << *it << std::endl;
 
-	std::cout << "push_back():\n" << std::endl;
+	std::cout << "Pre dec" << std::endl;
+	it_tmp = --it;
+	std::cout << *it_tmp << " | " << *it << std::endl;
 
-	vct.push_back("One long string");
-	vct2.push_back("Another long string");
+	std::cout << "Post inc" << std::endl;
+	it_tmp = it++;
+	std::cout << *it_tmp << " | " << *it << std::endl;
 
-	printSize(vct);
-	printSize(vct2);
-
-	vct.pop_back();
-	vct2.pop_back();
-
-	printSize(vct);
-	printSize(vct2);
+	std::cout << "Post dec" << std::endl;
+	it_tmp = it--;
+	std::cout << *it_tmp << " | " << *it << std::endl;
+	std::cout << "###############################################" << std::endl;
 }
+
+int		main(void)
+{
+	const int size = 5;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite = vct.begin();
+
+	for (int i = 0; i < size; ++i)
+		it[i] = (size - i) * 5;
+	prepost_incdec(vct);
+
+	it = it + 5;
+	it = 1 + it;
+	it = it - 4;
+	std::cout << *(it += 2) << std::endl;
+	std::cout << *(it -= 1) << std::endl;
+
+	*(it -= 2) = 42;
+	*(it += 2) = 21;
+
+	std::cout << "const_ite +=: " << *(ite += 2) << std::endl;
+	std::cout << "const_ite -=: " << *(ite -= 2) << std::endl;
+
+	std::cout << "(it == const_it): " << (ite == it) << std::endl;
+	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+
+	printSize(vct, true);
+	return (0);
+}
+
+
+// void	is_empty(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct)
+// {
+// 	std::cout << "is_empty: " << vct.empty() << std::endl;
+// }
+
+// int		main(void)
+// {
+// 	const int start_size = 7;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(start_size, 20);
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+
+// 	for (int i = 2; i < start_size; ++i)
+// 		it[i] = (start_size - i) * 3;
+// 	printSize(vct, true);
+
+// 	// vct.resize(10, 42);
+// 	// printSize(vct, true);
+
+// 	// vct.resize(18, 43);
+// 	// printSize(vct, true);
+// 	// vct.resize(10);
+// 	// printSize(vct, true);
+// 	// vct.resize(23, 44);
+// 	// printSize(vct, true);
+// 	// vct.resize(5);
+// 	// printSize(vct, true);
+// 	// vct.reserve(5);
+// 	// vct.reserve(3);
+// 	// printSize(vct, true);
+// 	// vct.resize(87);
+// 	// vct.resize(5);
+// 	// printSize(vct, true);
+
+// 	// is_empty(vct2);
+// 	// vct2 = vct;
+// 	// is_empty(vct2);
+// 	// vct.reserve(vct.capacity() + 1);
+// 	// printSize(vct, true);
+// 	// printSize(vct2, true);
+
+// 	// vct2.resize(0);
+// 	// is_empty(vct2);
+// 	// printSize(vct2, true);
+// 	return (0);
+// }
+
+// int main()
+// {
+// 	TESTED_NAMESPACE::vector<std::string> vct(8);
+// 	TESTED_NAMESPACE::vector<std::string> vct2;
+// 	TESTED_NAMESPACE::vector<std::string>::iterator it = vct.begin();
+
+// 	for (size_t i = 0; i < vct.size(); ++i)
+// 	{
+// 		it[i] = std::string((vct.size() - i), i + 65);
+// 		std::cout <<  std::string((vct.size() - i), i + 65) << std::endl;
+// 	}
+// 	printSize(vct, true);
+
+// 	std::cout << "push_back():\n" << std::endl;
+
+// 	vct.push_back("One long string");
+// 	vct2.push_back("Another long string");
+
+// 	printSize(vct);
+// 	printSize(vct2);
+
+// 	vct.pop_back();
+// 	vct2.pop_back();
+
+// 	printSize(vct);
+// 	printSize(vct2);
+// }
 
 // int main(int argc, char** argv) {
 // 	if (argc != 2)

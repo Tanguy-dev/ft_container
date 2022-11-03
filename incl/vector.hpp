@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/02 23:20:12 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/03 20:40:50 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
 		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
 		typedef typename std::size_t size_type;
-		// typedef typename std::iterator_traits<iterator>::difference_type		difference_type;
+		typedef typename std::iterator_traits<iterator>::difference_type		difference_type;
 
 	private:
 		allocator_type _alloc;
@@ -66,10 +66,10 @@ namespace ft
 			this->assign(first, last);
 		}
 
-		vector(const vector &x) : _alloc(x._alloc), _start(x._start), _size(x._size), _capacity(x._size)
+		vector(const vector &x) : _alloc(x._alloc), _start(0), _size(x._size), _capacity(x._size)
 		{
-			_start = _alloc.allocate(_size);
-			for (size_t i = 0; i < _size; i++)
+			_start = _alloc.allocate(x._size);
+			for (size_t i = 0; i < x._size; i++)
 				_alloc.construct(&_start[i], x._start[i]);
 		}
 
@@ -86,11 +86,11 @@ namespace ft
 				return (*this);
 			this->clear();
 			_alloc.deallocate(_start, _capacity);
-			_size = x._size;
 			_capacity = x._capacity;
-			_start = x._alloc.allocate(_capacity);
+			_size = x._size;
+			_start = _alloc.allocate(_size);
 			for (size_t i = 0; i < _size; i++)
-				_alloc.construct(&_start[i], x._start);
+				_alloc.construct(&_start[i], x._start[i]);
 			return (*this);
 		}
 
@@ -485,9 +485,9 @@ namespace ft
 		rit = rhs.begin();
 		while (lit != lhs.end())
 		{
-			if (rit == rhs.end() || *lit > *rit)
+			if (rit == rhs.end() || (*lit) > (*rit))
 				return (false);
-			else if (*lit < *rit)
+			else if ((*lit) < (*rit))
 				return (true);
 			lit++;
 			rit++;

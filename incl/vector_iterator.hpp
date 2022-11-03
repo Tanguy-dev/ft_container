@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:29:38 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/02 23:18:04 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/03 20:47:02 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace ft
 		typedef Reference reference;
 		typedef Category iterator_category;
 
-	private:
+	protected:
 		pointer _ptr;
 
 	public:
@@ -60,7 +60,7 @@ namespace ft
 
 		vector_iterator &operator=(const vector_iterator<const T> &cpy)
 		{
-			if (*this != cpy)
+			if (this != &cpy)
 				_ptr = cpy.get_ptr();
 			return (*this);
 		}
@@ -126,7 +126,7 @@ namespace ft
 			return (*_ptr);
 		}
 
-		value_type &operator->(void)
+		value_type *operator->(void)
 		{
 			return (_ptr);
 		}
@@ -169,7 +169,7 @@ namespace ft
 			return (*this);
 		}
 
-		value_type	operator[](int n)
+		value_type	operator[](int n) const
 		{
 			return (_ptr[n]);
 		}
