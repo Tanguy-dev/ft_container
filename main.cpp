@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/07 21:34:10 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:46:54 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -411,7 +411,7 @@ int		main(void)
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite = vct.begin();
 
 	for (int i = 0; i < size; ++i)
-		it[0] = (size - i) * 5;
+		it[i] = (size - i) * 5;
 	prepost_incdec(vct);
 
 	it = it + 5;

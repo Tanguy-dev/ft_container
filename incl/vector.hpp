@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:32 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/07 21:37:05 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/07 23:42:46 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "utils.hpp"
 #include <iostream>
 #include "vector_iterator.hpp"
+#include "reverse_iterator.hpp"
 #include <vector>
 
 namespace ft
@@ -34,13 +35,13 @@ namespace ft
 		/* Faire les vectors iterator et les reverses */
 		typedef ft::vector_iterator<value_type> iterator;
 		typedef ft::vector_iterator<const value_type> const_iterator;
-		// typedef	ft::reverse_iterator<iterator>							reverse_iterator;
-		// typedef	ft::reverse_iterator<const_iterator>					const_reverse_iterator;
-		typedef std::reverse_iterator<iterator> reverse_iterator;
-		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef	ft::reverse_iterator<iterator>							reverse_iterator;
+		typedef	ft::reverse_iterator<const_iterator>					const_reverse_iterator;
+		// typedef std::reverse_iterator<iterator> reverse_iterator;
+		// typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
 		typedef typename std::size_t size_type;
-		typedef typename std::iterator_traits<iterator>::difference_type		difference_type;
+		typedef typename ft::iterator_traits<iterator>::difference_type		difference_type;
 
 	private:
 		allocator_type _alloc;
