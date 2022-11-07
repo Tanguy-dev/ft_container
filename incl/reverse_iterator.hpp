@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:42:28 by thamon            #+#    #+#             */
-/*   Updated: 2022/10/18 20:46:38 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:45:23 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ namespace ft
 	template <class Iterator>
 	class reverse_iterator
 	{
-	private:
-		/* data */
 	public:
-		typedef Iterator	iterator_type;
+		typename iterator_traits<_Iterator>::iterator_category
+			typename iterator_traits<_Iterator>::value_type
+			typename iterator_traits<_Iterator>::difference_type
+			typename iterator_traits<_Iterator>::pointer
+			typename iterator_traits<_Iterator>::reference
 	};
-	
+
 }
 
 #endif

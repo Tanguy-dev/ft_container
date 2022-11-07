@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:29:38 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/03 20:47:02 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/07 21:45:25 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,19 +157,19 @@ namespace ft
 			return (_ptr - rhs.get_ptr());
 		}
 
-		vector_iterator	operator+=(int n)
+		vector_iterator	&operator+=(int n)
 		{
 			_ptr += n;
 			return (*this);
 		}
 
-		vector_iterator	operator-=(int n)
+		vector_iterator	&operator-=(int n)
 		{
 			_ptr -= n;
 			return (*this);
 		}
 
-		value_type	operator[](int n) const
+		value_type	&operator[](int n) const
 		{
 			return (_ptr[n]);
 		}
