@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/07 21:46:54 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/08 21:38:54 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,6 +380,8 @@ void	printSize(TESTED_NAMESPACE::vector<T> &vct, bool print_content = true)
 	std::cout << "###############################################" << std::endl;
 }
 
+#include <list>
+
 void	prepost_incdec(TESTED_NAMESPACE::vector<TESTED_TYPE> &vct)
 {
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
@@ -403,34 +405,53 @@ void	prepost_incdec(TESTED_NAMESPACE::vector<TESTED_TYPE> &vct)
 	std::cout << "###############################################" << std::endl;
 }
 
+typedef std::list<TESTED_TYPE> container_type;
+#define t_stack_ TESTED_NAMESPACE::stack<TESTED_TYPE, container_type>
+
+template <class T_STACK>
+void	cmp(const T_STACK &lhs, const T_STACK &rhs)
+{
+	static int i = 0;
+
+	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+}
+
 int		main(void)
 {
-	const int size = 5;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite = vct.begin();
+	container_type	ctnr;
 
-	for (int i = 0; i < size; ++i)
-		it[i] = (size - i) * 5;
-	prepost_incdec(vct);
+	ctnr.push_back(21);
+	ctnr.push_back(42);
+	ctnr.push_back(1337);
+	ctnr.push_back(19);
+	ctnr.push_back(0);
+	ctnr.push_back(183792);
 
-	it = it + 5;
-	it = 1 + it;
-	it = it - 4;
-	std::cout << *(it += 2) << std::endl;
-	std::cout << *(it -= 1) << std::endl;
+	t_stack_	stck(ctnr);
+	t_stack_	stck2(ctnr);
 
-	*(it -= 2) = 42;
-	*(it += 2) = 21;
+	cmp(stck, stck);  // 0
+	cmp(stck, stck2); // 1
 
-	std::cout << "const_ite +=: " << *(ite += 2) << std::endl;
-	std::cout << "const_ite -=: " << *(ite -= 2) << std::endl;
+	stck2.push(60);
+	stck2.push(61);
+	stck2.push(62);
 
-	std::cout << "(it == const_it): " << (ite == it) << std::endl;
-	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
-	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+	cmp(stck, stck2); // 2
+	cmp(stck2, stck); // 3
 
-	printSize(vct, true);
+	stck.push(42);
+
+	cmp(stck, stck2); // 4
+	cmp(stck2, stck); // 5
+
+	stck.push(100);
+
+	cmp(stck, stck2); // 6
+	cmp(stck2, stck); // 7
 	return (0);
 }
 
