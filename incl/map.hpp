@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:30 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/10 19:26:55 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:01:24 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ namespace ft
 	template <class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
+	public:
 		typedef Key key_type;
 		typedef T mapped_type;
 		typedef ft::pair<const key_type, mapped_type> value_type;
@@ -40,6 +41,34 @@ namespace ft
 		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef std::ptrdiff_t difference_type;
 		typedef std::size_t size_type;
+
+	public:
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
+		{
+
+		}
+
+		template <class InputIterator>
+		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
+		{
+			
+		}
+
+		map(const map &x)
+		{
+
+		}
+
+		~map()
+		{
+			
+		}
+
+		map& operator= (const map& x)
+		{
+			if (*this == x)
+				return (*this);
+		}
 	};
 }
 
