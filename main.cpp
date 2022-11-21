@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:21:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/10 16:26:07 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/21 22:54:51 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // #else
 #include <vector>
 #include <stack>
-// #include <map.hpp>
+#include <map.hpp>
 #include <pair.hpp>
 #include <stack.hpp>
 #include <vector.hpp>
