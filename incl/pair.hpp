@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:05:09 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/21 22:42:18 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/23 00:47:24 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ namespace ft
 	template <class T1, class T2>
 	bool operator< (const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
 	{
-		return (lhs.first < rhs.first || ((!(rhs.first < lhs.first)) && lhs.second < rhs.second));
+		return lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second);
 	}
 
 	template <class T1, class T2>

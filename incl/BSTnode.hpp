@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:04:29 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/21 22:31:31 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/22 23:06:29 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 		BSTnode *parent;
 		BSTnode *left;
 		BSTnode *right;
-		BSTnode *value;
+		Pair	value;
 
 		explicit BSTnode() : parent(NULL), left(NULL), right(NULL), value()
 		{

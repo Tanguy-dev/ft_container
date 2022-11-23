@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:29:38 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/21 22:55:29 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/23 01:24:11 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 namespace ft
 {
-	template <class T, class U, class Category = std::bidirectional_iterator_tag, class Distance = std::ptrdiff_t, class Pointer = U *, class Reference = U &>
+	template <class T, class U, class Category = std::bidirectional_iterator_tag, class Distance = std::ptrdiff_t, class Pointer = U*, class Reference = U&>
 	class map_iterator
 	{
 	public:
@@ -63,27 +63,27 @@ namespace ft
 
 		map_iterator &operator++(void)
 		{
-			_ptr = _ptr->next;
+			_ptr = _ptr->next();
 			return (*this);
 		}
 
 		map_iterator operator++(int)
 		{
 			map_iterator tmp = *this;
-			_ptr = _ptr->next;
+			_ptr = _ptr->next();
 			return (tmp);
 		}
 
 		map_iterator &operator--(void)
 		{
-			_ptr = _ptr->prev;
+			_ptr = _ptr->prev();
 			return (*this);
 		}
 
 		map_iterator operator--(int)
 		{
 			map_iterator tmp = *this;
-			_ptr = _ptr->prev;
+			_ptr = _ptr->prev();
 			return (tmp);
 		}
 
@@ -108,7 +108,7 @@ namespace ft
 		}
 	};
 
-		template <class T, class U, class map_iterator, class Category = std::bidirectional_iterator_tag, class Distance = std::ptrdiff_t, class Pointer = U *, class Reference = U &>
+	template <class T, class U, class map_iterator, class Category = std::bidirectional_iterator_tag, class Distance = std::ptrdiff_t, class Pointer = U*, class Reference = U&>
 	class constMap_iterator
 	{
 	public:
@@ -158,27 +158,27 @@ namespace ft
 
 		constMap_iterator &operator++(void)
 		{
-			_ptr = _ptr->next;
+			_ptr = _ptr->next();
 			return (*this);
 		}
 
 		constMap_iterator operator++(int)
 		{
 			constMap_iterator tmp = *this;
-			_ptr = _ptr->next;
+			_ptr = _ptr->next();
 			return (tmp);
 		}
 
 		constMap_iterator &operator--(void)
 		{
-			_ptr = _ptr->prev;
+			_ptr = _ptr->prev();
 			return (*this);
 		}
 
 		constMap_iterator operator--(int)
 		{
 			constMap_iterator tmp = *this;
-			_ptr = _ptr->prev;
+			_ptr = _ptr->prev();
 			return (tmp);
 		}
 

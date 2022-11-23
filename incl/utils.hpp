@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:45:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/16 22:44:30 by thamon           ###   ########.fr       */
+/*   Updated: 2022/11/23 00:33:06 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,65 @@ namespace ft
 	template <class Iterator>
 	class iterator_traits
 	{
-		public:
-			typedef typename Iterator::difference_type difference_type;
-			typedef typename Iterator::value_type value_type;
-			typedef typename Iterator::pointer pointer;
-			typedef typename Iterator::reference reference;
-			typedef typename Iterator::iterator_category iterator_category;
+	public:
+		typedef typename Iterator::difference_type difference_type;
+		typedef typename Iterator::value_type value_type;
+		typedef typename Iterator::pointer pointer;
+		typedef typename Iterator::reference reference;
+		typedef typename Iterator::iterator_category iterator_category;
 	};
 
 	template <class T>
 	class iterator_traits<T *>
 	{
-		public:
-			typedef ptrdiff_t difference_type;
-			typedef T value_type;
-			typedef T* pointer;
-			typedef T& reference;
-			typedef std::random_access_iterator_tag iterator_category;
+	public:
+		typedef ptrdiff_t difference_type;
+		typedef T value_type;
+		typedef T *pointer;
+		typedef T &reference;
+		typedef std::random_access_iterator_tag iterator_category;
 	};
-	
+
 	template <class T>
 	class iterator_traits<const T *>
 	{
-		public:
-			typedef ptrdiff_t difference_type;
-			typedef T value_type;
-			typedef const T* pointer;
-			typedef const T& reference;
-			typedef std::random_access_iterator_tag iterator_category;
+	public:
+		typedef ptrdiff_t difference_type;
+		typedef T value_type;
+		typedef const T *pointer;
+		typedef const T &reference;
+		typedef std::random_access_iterator_tag iterator_category;
 	};
+
+	template <class InputIterator1, class InputIterator2>
+	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
+	{
+		while (first1 != last1)
+		{
+			if (first2 == last2 || *first2 < *first1)
+				return false;
+			else if (*first1 < *first2)
+				return true;
+			++first1;
+			++first2;
+		}
+		return (first2 != last2);
+	}
+
+	template <class InputIterator1, class InputIterator2, class Compare>
+	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp)
+	{
+		while (first1 != last1)
+		{
+			if (first2 == last2 || comp(*first2, *first1))
+				return false;
+			else if (comp(*first1, *first2))
+				return true;
+			++first1;
+			++first2;
+		}
+		return (first2 != last2);
+	}
 
 	template <typename T>
 	struct is_integral
