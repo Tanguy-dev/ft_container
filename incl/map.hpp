@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:30 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/23 01:24:57 by thamon           ###   ########.fr       */
+/*   Updated: 2022/12/07 16:14:18 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ namespace ft
 			*this = x;
 		}
 
-		~map()
+		~map(void)
 		{
 			this->clear();
 			_node_alloc.destroy(_end);
@@ -196,7 +196,7 @@ namespace ft
 		/*		Element access		*/
 		mapped_type &operator[](const key_type &k)
 		{
-			return ((*(this->insert(value_type(k, mapped_type())).first)).second);
+			return (*(this->insert(value_type(k, mapped_type())).first)).second;
 		}
 
 		mapped_type &at(const key_type &k)
@@ -231,7 +231,7 @@ namespace ft
 				_root->left = _rend;
 				_root->right = _end;
 				_end->parent = _root;
-				_rend->left = _root;
+				_rend->parent = _root;
 				_size = 1;
 				return (ft::make_pair(iterator(_root), true));
 			}
@@ -356,6 +356,18 @@ namespace ft
 					left->parent = next;
 					right->parent = next;
 				}
+				else
+				{
+					if (!parent)
+						_root = next;
+					else if (parent->right == node)
+						parent->right = next;
+					else
+						parent->left = next;
+					left->parent = next;
+					next->parent = parent;
+					next->left = left;
+				}
 			}
 			_node_alloc.destroy(node);
 			_node_alloc.deallocate(node, 1);
@@ -367,7 +379,6 @@ namespace ft
 				_rend->left = NULL;
 				_end->right = NULL;
 				_end->left = NULL;
-				_rend->right = NULL;
 				_rend->parent = _end;
 			}
 		}
@@ -416,18 +427,18 @@ namespace ft
 			_size = size_tmp;
 		}
 
-		void clear()
+		void clear(void)
 		{
 			this->erase(this->begin(), this->end());
 		}
 
 		/*		Observers		*/
-		key_compare key_comp() const
+		key_compare key_comp(void) const
 		{
 			return (key_compare());
 		}
 
-		value_compare value_comp() const
+		value_compare value_comp(void) const
 		{
 			return (value_compare(key_compare()));
 		}
@@ -481,7 +492,7 @@ namespace ft
 			iterator it = this->begin();
 			while (it != this->end())
 			{
-				if (!_compare(it->first), k)
+				if (!_compare(it->first, k))
 					break;
 				it++;
 			}
@@ -493,7 +504,7 @@ namespace ft
 			const_iterator it = this->begin();
 			while (it != this->end())
 			{
-				if (!_compare(it->first), k)
+				if (!_compare(it->first, k))
 					break;
 				it++;
 			}
