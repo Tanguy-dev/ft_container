@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:45:20 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/23 00:33:06 by thamon           ###   ########.fr       */
+/*   Updated: 2022/12/07 23:02:55 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,19 @@ namespace ft
 			++first2;
 		}
 		return (first2 != last2);
+	}
+
+	template <class InputIterator1, class InputIterator2, class Compare>
+	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
+	{
+		while (first1 != last1)
+		{
+			if (!(*first1 == *first2))
+				return (false);
+			++first1;
+			++first2;
+		}
+		return (true);
 	}
 
 	template <typename T>

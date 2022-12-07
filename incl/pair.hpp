@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:05:09 by thamon            #+#    #+#             */
-/*   Updated: 2022/11/23 00:47:24 by thamon           ###   ########.fr       */
+/*   Updated: 2022/12/08 00:11:16 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ namespace ft
 		{
 		}
 
+		pair(const first_type &a, const second_type &b) : first(a), second(b)
+		{
+		}
+		
 		template <class U, class V>
 		pair(const pair<U, V> &pr) : first(pr.first), second(pr.second)
 		{
 		}
 
-		pair(const first_type &a, const second_type &b) : first(a), second(b)
-		{
-		}
 
 		pair<T1, T2> &operator=(const pair<T1, T2> &pr)
 		{
@@ -50,7 +51,7 @@ namespace ft
 	template <class T1, class T2>
 	pair<T1, T2> make_pair(T1 x, T2 y)
 	{
-		return (pair<T1, T2>(x, y));
+		return pair<T1, T2>(x,y);
 	};
 
 	template <class T1, class T2>
@@ -62,7 +63,7 @@ namespace ft
 	template <class T1, class T2>
 	bool operator!= (const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
 	{
-		return (lhs != rhs);
+		return !(lhs == rhs);
 	}
 
 	template <class T1, class T2>

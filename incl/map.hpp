@@ -6,7 +6,7 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:24:30 by thamon            #+#    #+#             */
-/*   Updated: 2022/12/07 16:14:18 by thamon           ###   ########.fr       */
+/*   Updated: 2022/12/08 00:44:10 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #define MAP_HPP
 
 #include <stdexcept>
+#include <utility>
 #include "pair.hpp"
-// #include "BSTnode.hpp"
+#include "BSTnode.hpp"
 #include "map_iterator.hpp"
 #include "reverse_iterator.hpp"
 
@@ -128,8 +129,8 @@ namespace ft
 			this->clear();
 			_compare = x._compare;
 			_size = 0;
-			_alloc = x.alloc;
-			_node_alloc = x.node_alloc;
+			_alloc = x._alloc;
+			_node_alloc = x._node_alloc;
 			this->insert(x.begin(), x.end());
 			return (*this);
 		}
@@ -190,7 +191,7 @@ namespace ft
 
 		size_type max_size(void) const
 		{
-			return (_alloc.max_size());
+			return (_node_alloc.max_size());
 		}
 
 		/*		Element access		*/
@@ -221,7 +222,6 @@ namespace ft
 			iterator it;
 			map_node *node;
 			map_node *new_node;
-
 
 			if (!_root)
 			{
@@ -415,7 +415,7 @@ namespace ft
 			_root = tmp;
 
 			tmp = x._end;
-			x.end = _end;
+			x._end = _end;
 			_end = tmp;
 
 			tmp = x._rend;
