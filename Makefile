@@ -16,7 +16,7 @@ CFLAGS        =        -I incl/ -Wall -Wextra -Werror -c -std=c++98 -g -MMD -MP
 OBJS_D          =       objs/
 
 
-SRCS_L          =       map_main.cpp
+SRCS_L          =       main.cpp
 TEST_STACK		=		stack_main.cpp
 TEST_MAP		=		map_main.cpp
 TEST_VECTOR		=		vector_main.cpp
@@ -44,13 +44,10 @@ vector: $(NAME_V)
 map:	$(NAME_M)
 
 $(NAME_S):		$(OBJS_STACK)
-	@echo "TEST FOR STACK HAVE BEEN COMPILED"
 	$(CC) $(OBJS_STACK) $(OUTPUT_OPTION) -o $(NAME_S)
 $(NAME_V):		$(OBJS_VECTOR)
-	@echo "TEST FOR STACK HAVE BEEN COMPILED"
 	$(CC) $(OBJS_VECTOR) $(OUTPUT_OPTION) -o $(NAME_V)
 $(NAME_M):		$(OBJS_MAP)
-	@echo "TEST FOR MAP HAVE BEEN COMPILED"
 	$(CC) $(OBJS_MAP) $(OUTPUT_OPTION) -o $(NAME_M)
 
 $(NAME):                $(OBJS_L)

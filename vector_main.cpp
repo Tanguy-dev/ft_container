@@ -6,13 +6,15 @@
 /*   By: thamon <thamon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:32:08 by thamon            #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:09 by thamon           ###   ########.fr       */
+/*   Updated: 2022/12/28 18:28:46 by thamon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "incl/vector.hpp"
-#include <vector>
+#include <iostream>
+// #include <vector>
+// namespace ft = std;
 
 int main(void)
 {
@@ -47,10 +49,10 @@ int main(void)
     std::cout << "value of first element : " << a.at(0) << std::endl;
     std::cout << "value of last element : " << a.at(a.size() - 1) << std::endl;
 	std::cout << "=====\t Testing all differents constructors" << std::endl;
-    ft::vector<int> first;                                // empty vector of ints
-    ft::vector<int> second (4,100);                       // four ints with value 100
-    ft::vector<int> third (second.begin(),second.end());  // iterating through second
-    ft::vector<int> fourth (third);                       // a copy of third
+    ft::vector<int> first;                                
+    ft::vector<int> second (4,100);                       
+    ft::vector<int> third (second.begin(),second.end());  
+    ft::vector<int> fourth (third);                       
 	std::cout << "all constructors correctly have been created." << std::endl;
     std::cout << "========================= SWAP =========================" << std::endl;
     std::cout << "now creating a new vector and fully asign it 42" << std::endl;
@@ -113,10 +115,10 @@ int main(void)
     int_vec.insert(int_vec.begin(), 4200);
     char_vec.insert(char_vec.begin(), 'a');
     char_vec.insert(char_vec.begin(), 'b');
-    string_vec.insert(string_vec.begin(), "bonjour");
-    string_vec.insert(string_vec.begin(), "je suis");
-    string_vec.insert(string_vec.begin(), "Olivier");
-    string_vec.insert(string_vec.begin(), "De chez carglass");
+    string_vec.insert(string_vec.begin(), "salut");
+    string_vec.insert(string_vec.begin(), "les");
+    string_vec.insert(string_vec.begin(), "amis comment");
+    string_vec.insert(string_vec.begin(), "allez vous ?");
     
     std::cout << "size of bool vector : " << bool_vec.size() << std::endl;
     std::cout << "size of char vector : " << char_vec.size() << std::endl;
@@ -136,7 +138,7 @@ int main(void)
     std::cout << "                    Resize check                  " << std::endl;
     std::cout << "===================== RESIZE =====================" << std::endl;
     
-    bool_vec.resize(42);
+    bool_vec.resize(64);
     char_vec.resize(420);
     int_vec.resize(4200);
     string_vec.resize(42000);
@@ -195,7 +197,7 @@ int main(void)
 
     std::cout << std::endl;
     
-    bool_vec.reserve(84);
+    bool_vec.reserve(128);
     char_vec.reserve(840);
     int_vec.reserve(8400);
     string_vec.reserve(84000);
@@ -236,7 +238,7 @@ int main(void)
     bool_vec.insert(bool_vec.begin(), true);
     char_vec.insert(char_vec.begin(), 'A');
     int_vec.insert(int_vec.begin(), 222);
-    string_vec.insert(string_vec.begin(), "Terry Crews - Old Spice Collab (TV Size)");
+    string_vec.insert(string_vec.begin(), "Je ne sais pas quoi ecrire");
     
     std::cout << std::endl;
     std::cout << "====== AFTER INSERT =====" << std::endl;
